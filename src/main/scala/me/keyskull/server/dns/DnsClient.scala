@@ -16,10 +16,12 @@ class DnsClient {
   implicit val system = ActorSystem("DnsServer")
   implicit val timeout = Timeout(5 seconds)
 
-  IO(Dns) ! Dns.DnsPacket(Query ~ Questions(QName("google.de")), new InetSocketAddress("8.8.8.8", 53)) onSuccess {
-    case Response(Answers(answers)) =>
-      answers.collect {
-        case ARecord(arecord) => println(arecord.address.getHostAddress)
-      }
-  }
+  IO(Dns) ! Dns.DnsPacket(Query ~ Questions(QName("google.de")), new InetSocketAddress("8.8.8.8", 53))
+
+//  onSuccess {
+//    case Response(Answers(answers)) =>
+//      answers.collect {
+//        case ARecord(arecord) => println(arecord.address.getHostAddress)
+//      }
+//  }
 }

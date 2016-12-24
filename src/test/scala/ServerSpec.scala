@@ -5,7 +5,7 @@
 import java.sql.DriverManager
 
 import me.keyskull.core.Initialization
-import org.bitcoinj.core.NetworkParameters
+import me.keyskull.core.NetworkParameters
 import org.bitcoinj.store.{BlockStore, MySQLFullPrunedBlockStore}
 
 import collection.mutable.Stack

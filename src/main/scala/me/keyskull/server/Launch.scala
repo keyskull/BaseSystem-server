@@ -2,6 +2,7 @@ package me.keyskull.server
 
 import java.sql.DriverManager
 
+import me.keyskull.core.NetworkParameters
 import org.bitcoinj.core._
 import org.bitcoinj.store.{BlockStore, MemoryBlockStore, MySQLFullPrunedBlockStore}
 

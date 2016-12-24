@@ -2,10 +2,11 @@ package me.keyskull.server
 
 import java.net.InetAddress
 
+import me.keyskull.core.NetworkParameters
 import org.bitcoinj.core._
 import org.bitcoinj.core.listeners.BlocksDownloadedEventListener
 import org.bitcoinj.net.discovery.DnsDiscovery
-import org.bitcoinj.params.{MainNetParams, RegTestParams, TestNet3Params}
+import me.keyskull.params.{MainNetParams, RegTestParams, TestNet3Params}
 import org.bitcoinj.store.{BlockStore, MemoryBlockStore}
 import org.bitcoinj.utils.BriefLogFormatter
 
@@ -23,11 +24,11 @@ class InitServer(programName: String, version: String) {
     BriefLogFormatter.init()
     val (params: NetworkParameters, filePrefix) = args.applyOrElse[Int, String](1, _ => "") match {
       case "testnet" =>
-        (TestNet3Params.get(), "forwarding-service-testnet")
+        (TestNet3Params.get, "forwarding-service-testnet")
       case "regtest" =>
-        (RegTestParams.get(), "forwarding-service-regtest")
+        (RegTestParams.get, "forwarding-service-regtest")
       case _ =>
-        (MainNetParams.get(), "forwarding-service-mainnet")
+        (MainNetParams.get, "forwarding-service-mainnet")
     }
 //    Address.fromBase58(params,"1ALdfYANRYzKcmLrh7APH64N44jkoUCxQ4")
 
@@ -38,7 +39,7 @@ class InitServer(programName: String, version: String) {
     peerGroup.addPeerDiscovery(new DnsDiscovery(params))
     peerGroup.setUserAgent(programName,version)
     peerGroup.start()
-    peerGroup.addAddress(new PeerAddress(InetAddress.getLocalHost(), params.getPort()))
+    peerGroup.addAddress(new PeerAddress(InetAddress.getLocalHost(), params.getPort))
     peerGroup.addBlocksDownloadedEventListener(new BlocksDownloadedEventListener {
       override def onBlocksDownloaded(peer: Peer, block: Block, filteredBlock: FilteredBlock, blocksLeft: Int) = {
         println(peer.getBestHeight)
