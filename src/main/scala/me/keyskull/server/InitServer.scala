@@ -3,10 +3,10 @@ package me.keyskull.server
 import java.net.InetAddress
 
 import me.keyskull.core.NetworkParameters
+import me.keyskull.params.bitcoin.{MainNetParams, RegTestParams, TestNet3Params}
 import org.bitcoinj.core._
 import org.bitcoinj.core.listeners.BlocksDownloadedEventListener
 import org.bitcoinj.net.discovery.DnsDiscovery
-import me.keyskull.params.{MainNetParams, RegTestParams, TestNet3Params}
 import org.bitcoinj.store.{BlockStore, MemoryBlockStore}
 import org.bitcoinj.utils.BriefLogFormatter
 
